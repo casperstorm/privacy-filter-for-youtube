@@ -1,0 +1,45 @@
+name: Draft Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  draft-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Read extension version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./manifest.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION-build-${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+          echo "asset=privacy-filter-for-youtube-$VERSION.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Build extension zip
+        run: |
+          mkdir -p dist
+          zip -r "dist/${{ steps.version.outputs.asset }}" manifest.json content.js assets README.md
+
+      - name: Create draft GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          target_commitish: master
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: Privacy Filter for Youtube v${{ steps.version.outputs.version }}
+          draft: true
+          generate_release_notes: true
+          files: dist/${{ steps.version.outputs.asset }}
