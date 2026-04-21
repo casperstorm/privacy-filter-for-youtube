@@ -3,6 +3,13 @@
   "name": "Privacy Filter for Youtube",
   "version": "1.0.0",
   "description": "Adds a YouTube watch-page toggle that places a black privacy cover over the video player.",
+  "icons": {
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "64": "assets/icons/icon-64.png",
+    "96": "assets/icons/icon-96.png",
+    "128": "assets/icons/icon-128.png"
+  },
   "content_scripts": [
     {
       "matches": [
