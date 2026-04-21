@@ -1,0 +1,4 @@
+.DS_Store
+Thumbs.db
+*.xpi
+.web-ext/

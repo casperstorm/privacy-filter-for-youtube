@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Privacy Filter for Youtube",
+  "version": "1.0.0",
+  "description": "Adds a YouTube watch-page toggle that places a black privacy cover over the video player.",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "privacy-filter-youtube@local"
+    }
+  }
+}
