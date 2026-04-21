@@ -23,7 +23,12 @@
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "privacy-filter-youtube@local"
+      "id": "privacy-filter-youtube@local",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
     }
   }
 }
